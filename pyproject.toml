@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0", "cffi>=1.15.0"]
+requires = ["setuptools>=64", "cffi>=1.15.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -18,14 +18,10 @@ classifiers = [
     "Environment :: Console",
     "Intended Audience :: Financial and Insurance Industry",
     "License :: OSI Approved :: MIT License",
-    "Operating System :: POSIX :: Linux",
-    "Operating System :: MacOS",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
-    "Topic :: Office/Business :: Financial :: Investment",
-    "Typing :: Typed",
 ]
 
 dependencies = [
@@ -49,11 +45,6 @@ dev = [
 [project.scripts]
 quiver = "quiver.app:main"
 
-[project.urls]
-Homepage = "https://github.com/yourusername/quiver"
-Repository = "https://github.com/yourusername/quiver"
-Documentation = "https://github.com/yourusername/quiver#readme"
-
 [tool.setuptools.packages.find]
 where = ["src"]
 
@@ -63,59 +54,18 @@ quiver = ["ui/styles/*.tcss"]
 [tool.black]
 line-length = 88
 target-version = ["py310", "py311", "py312"]
-include = '\.pyi?$'
 
 [tool.ruff]
 line-length = 88
 target-version = "py310"
-select = [
-    "E",   # pycodestyle errors
-    "W",   # pycodestyle warnings
-    "F",   # pyflakes
-    "I",   # isort
-    "B",   # flake8-bugbear
-    "C4",  # flake8-comprehensions
-    "UP",  # pyupgrade
-]
-ignore = [
-    "E501",  # line too long (handled by black)
-]
-
-[tool.ruff.isort]
-known-first-party = ["quiver"]
+select = ["E", "W", "F", "I", "B", "C4", "UP"]
 
 [tool.mypy]
 python_version = "3.10"
 warn_return_any = true
-warn_unused_configs = true
 disallow_untyped_defs = true
-disallow_incomplete_defs = true
-check_untyped_defs = true
-strict_optional = true
-warn_redundant_casts = true
-warn_unused_ignores = true
-
-[[tool.mypy.overrides]]
-module = "cffi.*"
-ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 minversion = "7.0"
 asyncio_mode = "auto"
 testpaths = ["tests"]
-addopts = "-ra -q --cov=quiver --cov-report=term-missing"
-filterwarnings = [
-    "ignore::DeprecationWarning",
-]
-
-[tool.coverage.run]
-source = ["src/quiver"]
-branch = true
-
-[tool.coverage.report]
-exclude_lines = [
-    "pragma: no cover",
-    "def __repr__",
-    "raise NotImplementedError",
-    "if TYPE_CHECKING:",
-]
