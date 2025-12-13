@@ -1,0 +1,141 @@
+/* Quiver Application Styles */
+
+/* Main screen layout */
+Screen {
+    background: $surface;
+}
+
+/* Header styling */
+Header {
+    background: $primary;
+    color: $text;
+}
+
+/* Footer styling */
+Footer {
+    background: $primary-darken-2;
+}
+
+/* Positions table */
+PositionsTable {
+    height: 100%;
+    border: round $primary;
+}
+
+PositionsTable > .datatable--header {
+    background: $primary-darken-1;
+    color: $text;
+    text-style: bold;
+}
+
+PositionsTable > .datatable--cursor {
+    background: $primary;
+    color: $text;
+}
+
+PositionsTable > .datatable--hover {
+    background: $primary-darken-3;
+}
+
+/* Greeks panel at bottom */
+GreeksPanel {
+    height: 3;
+    padding: 0 2;
+    background: $surface-darken-1;
+    border-top: solid $primary;
+    content-align: center middle;
+}
+
+/* Container styles */
+#positions-container {
+    height: 1fr;
+    padding: 1;
+}
+
+#footer-container {
+    height: auto;
+    dock: bottom;
+}
+
+/* Color definitions for P&L */
+.positive {
+    color: $success;
+}
+
+.negative {
+    color: $error;
+}
+
+/* Loading indicator */
+.loading {
+    text-style: italic;
+    color: $text-muted;
+}
+
+/* Detail screen styles */
+.detail-panel {
+    border: round $primary;
+    padding: 1 2;
+    margin: 1;
+}
+
+.detail-header {
+    text-style: bold;
+    color: $primary;
+    margin-bottom: 1;
+}
+
+.detail-row {
+    height: auto;
+    margin-bottom: 0;
+}
+
+.detail-label {
+    width: 12;
+    color: $text-muted;
+}
+
+.detail-value {
+    color: $text;
+}
+
+/* Modal dialogs */
+ModalScreen {
+    align: center middle;
+}
+
+.modal-dialog {
+    width: 60;
+    height: auto;
+    padding: 1 2;
+    background: $surface;
+    border: thick $primary;
+}
+
+.modal-title {
+    text-style: bold;
+    color: $primary;
+    margin-bottom: 1;
+}
+
+/* Input fields */
+Input {
+    margin-bottom: 1;
+}
+
+Input:focus {
+    border: tall $primary;
+}
+
+/* Buttons */
+Button {
+    margin: 1 0;
+}
+
+Button.primary {
+    background: $primary;
+}
+
+Button.secondary {
+    background: $surface-darken-1;
+}

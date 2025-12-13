@@ -46,13 +46,13 @@ class FDPricing:
 
     # Default search paths for the library
     DEFAULT_LIB_PATHS = [
-        # Relative to quiver package
+        # Primary location: ~/libraries/
+        Path.home() / "libraries" / "libfdpricing.so",
+        # Relative to quiver package (local lib/ directory)
         Path(__file__).parent.parent.parent.parent / "lib" / "libfdpricing.so",
         # System paths
         Path("/usr/local/lib/libfdpricing.so"),
         Path("/usr/lib/libfdpricing.so"),
-        # Development paths
-        Path.home() / "lib" / "libfdpricing.so",
     ]
 
     def __init__(self, lib_path: str | Path | None = None) -> None:
@@ -61,6 +61,7 @@ class FDPricing:
         Args:
             lib_path: Optional explicit path to libfdpricing.so.
                       If not provided, searches default locations.
+                      Primary default: ~/libraries/libfdpricing.so
 
         Raises:
             FDPricingNotFoundError: If the library cannot be found.
@@ -113,7 +114,8 @@ class FDPricing:
         msg = (
             "Could not find libfdpricing.so. Searched:\n"
             + "\n".join(f"  - {p}" for p in searched)
-            + "\n\nSet FDPRICING_LIB_PATH environment variable or pass lib_path argument."
+            + "\n\nPlace libfdpricing.so in ~/libraries/"
+            + "\nOr set FDPRICING_LIB_PATH environment variable"
         )
         raise FDPricingNotFoundError(msg)
 

@@ -1,0 +1,70 @@
+{
+  "name": "Sample Book",
+  "positions": [
+    {
+      "option": {
+        "underlying": "AAPL",
+        "strike": 180.0,
+        "expiry": "2024-06-21",
+        "option_type": "CALL",
+        "style": "EUROPEAN"
+      },
+      "quantity": 10,
+      "entry_price": 12.50,
+      "entry_date": "2024-05-01",
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    },
+    {
+      "option": {
+        "underlying": "SPY",
+        "strike": 450.0,
+        "expiry": "2024-07-19",
+        "option_type": "PUT",
+        "style": "EUROPEAN"
+      },
+      "quantity": -5,
+      "entry_price": 8.20,
+      "entry_date": "2024-05-10",
+      "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901"
+    },
+    {
+      "option": {
+        "underlying": "NVDA",
+        "strike": 900.0,
+        "expiry": "2024-06-21",
+        "option_type": "CALL",
+        "style": "AMERICAN"
+      },
+      "quantity": 5,
+      "entry_price": 45.30,
+      "entry_date": "2024-05-15",
+      "id": "c3d4e5f6-a7b8-9012-cdef-123456789012"
+    },
+    {
+      "option": {
+        "underlying": "TSLA",
+        "strike": 200.0,
+        "expiry": "2024-08-16",
+        "option_type": "PUT",
+        "style": "AMERICAN"
+      },
+      "quantity": 10,
+      "entry_price": 15.75,
+      "entry_date": "2024-05-20",
+      "id": "d4e5f6a7-b8c9-0123-defa-234567890123"
+    },
+    {
+      "option": {
+        "underlying": "AMZN",
+        "strike": 180.0,
+        "expiry": "2024-06-21",
+        "option_type": "CALL",
+        "style": "EUROPEAN"
+      },
+      "quantity": -3,
+      "entry_price": 9.80,
+      "entry_date": "2024-05-25",
+      "id": "e5f6a7b8-c9d0-1234-efab-345678901234"
+    }
+  ]
+}
