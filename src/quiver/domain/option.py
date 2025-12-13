@@ -71,6 +71,7 @@ class Option:
     def symbol(self) -> str:
         """Generate option symbol (simplified format)."""
         type_char = "C" if self.option_type == OptionType.CALL else "P"
+        style_char = "EU" if self.style == OptionStyle.EUROPEAN else "AM"
         return f"{self.underlying} {self.strike:.0f}{type_char} {self.expiry:%b%y}"
 
     @property
