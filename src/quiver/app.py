@@ -1,19 +1,13 @@
 """Quiver TUI application entry point."""
-
 from __future__ import annotations
-
 import argparse
-import asyncio
 import sys
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import TYPE_CHECKING
-
 from textual.app import App, ComposeResult
 from textual.binding import Binding
-from textual.containers import Container, Horizontal, Vertical
-from textual.widgets import Footer, Header, Static
-
+from textual.widgets import Footer, Header
 from quiver.domain.book import Book
 from quiver.ui.screens.book_screen import BookScreen
 
@@ -23,11 +17,9 @@ if TYPE_CHECKING:
 
 class QuiverApp(App[None]):
     """Main Quiver TUI application."""
-
     TITLE = "Quiver"
     SUB_TITLE = "Options Book"
     CSS_PATH = "ui/styles/app.tcss"
-
     BINDINGS = [
         Binding("q", "quit", "Quit", show=True),
         Binding("r", "refresh", "Refresh All", show=True),
@@ -43,7 +35,6 @@ class QuiverApp(App[None]):
         lib_path: Path | None = None,
     ) -> None:
         """Initialize the application.
-
         Args:
             book: Optional pre-loaded book. If None, starts with empty book.
             lib_path: Optional path to libfdpricing.so
@@ -75,7 +66,16 @@ class QuiverApp(App[None]):
 
     def action_add_position(self) -> None:
         """Add a new position."""
-        self.notify("Add position: Not yet implemented", severity="warning")
+        from quiver.ui.screens.add_position_screen import AddPositionScreen
+
+        def handle_result(position) -> None:
+            if position is not None:
+                self.book.add(position)
+                book_screen = self.query_one(BookScreen)
+                book_screen.refresh_all()
+                self.notify(f"Added {position.option.symbol}", severity="information")
+
+        self.push_screen(AddPositionScreen(), handle_result)
 
     def action_delete_position(self) -> None:
         """Delete the selected position."""
@@ -117,14 +117,12 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     """Main entry point."""
     args = parse_args()
-
     book = None
     if args.book:
         if not args.book.exists():
             print(f"Error: Book file not found: {args.book}", file=sys.stderr)
             return 1
         book = Book.load(args.book)
-
     app = QuiverApp(book=book, lib_path=args.lib_path)
     app.run()
     return 0

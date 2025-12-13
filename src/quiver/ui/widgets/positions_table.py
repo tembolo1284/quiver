@@ -25,10 +25,10 @@ class PositionsTable(DataTable):
         ("Symbol", 16),
         ("Strike", 10),
         ("Expiry", 12),
-        ("Qty", 6),
+        ("Qty", 8),
         ("Price", 10),
-        ("Delta", 8),
-        ("Gamma", 8),
+        ("Delta", 10),
+        ("Gamma", 10),
         ("P&L", 12),
     ]
 
@@ -82,19 +82,19 @@ class PositionsTable(DataTable):
 
         # Price
         if pos.current_price is not None:
-            price = f"${pos.current_price:,.2f}"
+            price = f"${pos.current_price:,.4f}"
         else:
             price = "—"
 
         # Delta
         if pos.greeks is not None:
-            delta = f"{pos.greeks.delta:+.3f}"
+            delta = f"{pos.greeks.delta:+.4f}"
         else:
             delta = "—"
 
         # Gamma
         if pos.greeks is not None:
-            gamma = f"{pos.greeks.gamma:.4f}"
+            gamma = f"{pos.greeks.gamma:.5f}"
         else:
             gamma = "—"
 
@@ -110,16 +110,13 @@ class PositionsTable(DataTable):
 
         return (symbol, strike, expiry, qty, price, delta, gamma, pnl)
 
-    def refresh_prices(self) -> None:
-        """Trigger a price refresh for all positions.
-
-        This is a placeholder - actual pricing integration will be added.
-        """
-        self.app.notify("Refreshing prices...", severity="information")
-        # TODO: Integrate with pricing engine
-        # For now, just refresh the display
+    def refresh_table(self) -> None:
+        """Refresh the table display."""
         self._refresh_rows()
-        self.app.notify("Prices refreshed", severity="information")
+
+    def refresh_prices(self) -> None:
+        """Trigger a price refresh (called from old code path)."""
+        self.refresh_table()
 
     @property
     def selected_position_id(self) -> str | None:
